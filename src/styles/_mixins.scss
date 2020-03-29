@@ -1,0 +1,59 @@
+@mixin debug {
+  border: 1px solid red !important;
+}
+
+@mixin boxed-text($distance) {
+  position: relative;
+  overflow: visible;
+  z-index: 2;
+  margin-top: -$distance;
+  margin-right: -$distance;
+  margin-bottom: $distance * 2;
+  margin-left: -$distance;
+  padding: $distance;
+
+  color: linear-gradient(-90deg, hsla(calc(var(--hue-1) + 30), 80%, 30%, 1), hsla(var(--hue-2), 100%, 30%, 1));
+  background: white;
+  box-shadow: 0 3rem 6rem hsla(var(--hue-1), 60%, 40%, .05),
+    0 2rem 4rem hsla(var(--hue-1), 60%, 40%, .10),
+    0 1rem 2rem hsla(var(--hue-1), 60%, 40%, .15);
+}
+
+@mixin spectrum-bands($distance: 4rem, $opacity: .33, $bool: false) {
+  position: absolute;
+  top:0; right:0; bottom:0;
+  z-index: 1;
+  width: $distance;
+  background: white;
+  background: linear-gradient(to left, hsla(var(--hue-1), 80%, 40%, 1), hsla(calc(var(--hue-2)), 100%, 60%, 1));
+
+  &::after {
+    content: ' ';
+    position: absolute;
+    top:0; right:0; bottom:0; left:0;
+    height: var(--book-height);
+    
+    @if $bool {
+      border-top: $distance solid transparent;
+      border-bottom: $distance solid transparent;
+      border-left: $distance solid white;
+    }
+  }
+
+  .white-band {
+    $number: 3;
+    
+    position: absolute;
+    top:0; bottom:0; left:0;
+    z-index: 2;
+    opacity: $opacity;
+    background: white;
+    
+    @for $i from 1 through $number {
+      &:nth-of-type(#{$i}) {
+        width: calc(#{$distance / $number} * #{$i});
+        // mix-blend-mode: screen;
+      }
+    }
+  }
+}

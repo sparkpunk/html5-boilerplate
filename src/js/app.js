@@ -1,7 +1,5 @@
-const testModules = require('./test-module');
-require('../css/app.css');
+require('./fitText.js')
+require('../styles/styles.scss')
 
-/********** Paste your code here! ************/
-
-console.log('Paste your code here!');
-console.log(testModules.hello);
+jQuery("#author").fitText(2)
+jQuery("#title").fitText(2)
